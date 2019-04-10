@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}房间详情{% end %}
+
+
+
+{%block sidebar%}
+    <ul class="nav nav-sidebar">
+        <li class="active"><a href="/game/siteindex">管理首页</a></li>
+    </ul>
+{%end%}
+
+{% block main %}
+<div class="container">
+<P class="lead" style="padding-top: 50px">房间地址:
+    <mark>http://{{default_ip}}/g/{{ desk.desk_id}}</mark>
+</P>
+</div>
+<h5 class="sub-header">玩家列表</h5>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>玩家ID</th>
+            <th>玩家姓名</th>
+            <th>玩家电话</th>
+            <th>玩家积分</th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+        {%for item in player_list%}
+
+        <tr>
+            <td><a href="/game/playerrecord/{{ item.id}}">{{item.playerId}}</a></td>
+            <td>{{item.player_name}}</td>
+            <td>{{ item.player_phone }}</td>
+            <td>{{ item.player_points }}</td>
+        </tr>
+        {% end %}
+
+        </tbody>
+    </table>
+</div>
+
+{%end%}

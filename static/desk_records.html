@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}游戏记录{% end %}
+{% block main %}
+
+<h2 class="sub-header">记录</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+               <thead>
+                <tr>
+                  <th>#</th>
+                  <th>时间</th>
+                  <th>总投注</th>
+                  <th>最后得分</th>
+                  <th>庄开</th>
+                  <th>闲开</th>
+                  <th>结果</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in record_list %}
+                {% if item %}
+                    <tr>
+                        <td>{{item.id}}</td>
+                        <td>{{datetime.datetime.strftime(item.game_time, "%Y-%m-%d %H:%M:%S")}}</td>
+                        <td>{{item.all_bet}}</td>
+                        <td>{{item.all_paid}}</td>
+                        <td>
+                            {%for item1 in item.bank_cards%}
+                            {{item1 & 15}}
+                            {%end%}
+                        </td>
+                        <td>
+                            {%for item2 in item.player_cards%}
+                            {{item2 & 15}}
+                            {%end%}
+                        </td>
+                        <td>
+                            {%for item2 in item.game_result%}
+                            {%if item2==0%}
+                            庄，
+                            {%elif item2==1%}
+                            闲，
+                            {%elif item2==2%}
+                            平，
+                            {%elif item2==3%}
+                            庄对，
+                            {%elif item2==4%}
+                            闲对，
+                            {%end%}
+                            {%end%}
+                        </td>
+                        <td>
+                            <a class="button btn btn-warning" href="/game/gamedetail/{{item.id}}">详情</a>
+                        </td>
+                    </tr>
+                {%end%}
+                {% end %}
+              </tbody>
+            </table>
+          </div>
+{% end %}

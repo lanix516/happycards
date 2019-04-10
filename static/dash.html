@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}后台首页{% end %}
+{% block main %}
+
+<h2 class="sub-header">后台首页</h2>
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+
+        <tbody class="text-center">
+
+        <tr>
+            <td class="success col-sm-1">总房间数</td>
+            <td class="col-sm-1">{{result["desk_count"]}}</td>
+            <td class="success col-sm-1">总玩家数</td>
+            <td class="col-sm-1">{{result["player_count"]}}</td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+{% end %}

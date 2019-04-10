@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}创建房间{% end %}
+
+{% block main %}
+
+<h2 class="sub-header">创建房间</h2>
+<div class="container col-xm-3">
+<ul class="list-unstyled ">
+    {%for item in message%}
+        <li><h4 class=" text-center text-danger"><span class="label label-warning">Warning:</span>{{item}}</h4></li>
+    {%end%}
+</ul>
+</div>
+<div class="container col-xm-3">
+<form class="form-inline" method="post" action="/game/newdesk">
+    <div class="form-group">
+        <label class="control-label">房主的Id</label>
+        <input type="text" class="form-control" name="player_id" id="player_id">
+    </div>
+
+    <button type="submit" class="btn btn-primary">OK</button>
+
+</form>
+</div>
+{% end %}
+
+

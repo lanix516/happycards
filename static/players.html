@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}玩家列表{% end %}
+{% block main %}
+<div class="container col-xs-4">
+    <form class="form-inline" method="post" action="/game/search">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon">查询</div>
+                <input type="text" class="form-control" name="search_field" id="search_field" placeholder="id">
+            </div>
+
+        </div>
+        <select class="form-control" name="search_type" id="search_type">
+            <option value="1">Id</option>
+            <option value="2">用户名</option>
+            <option value="3">电话</option>
+        </select>
+        <button type="submit" class="btn btn-primary"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+    </form>
+</div>
+<a href="/game/addplayer"><button class="btn btn-warning">添加用户</button></a>
+<h2 class="sub-header">用户列表</h2>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>玩家Id</th>
+            <th>电话</th>
+            <th>姓名</th>
+            <th>积分</th>
+            <th>上次登录</th>
+            <th>房间</th>
+            <th>vip等级</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in players%}
+        <tr>
+            <td><a href="/game/playerrecord/{{ item.id}}">{{item.playerId}}</a></td>
+            <td>{{item.player_phone}}</td>
+            <td>{{item.player_name}}</td>
+            <td>{{item.player_points}}</td>
+            <td>{{item.last_login}}</td>
+            <td>{{item.player_desk}}</td>
+            <td>{{item.player_vip}}</td>
+            <td><a href="/game/updateplayer/{{ item.id}}">修改</a></td>
+            {%end%}
+        </tr>
+        </tbody>
+    </table>
+</div>
+<nav>
+    <ul class="pagination">
+        <li>
+            <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        {%for item in page_all%}
+        <li><a href="/game/player?page={{item}}">{{item}}</a></li>
+        {%end%}
+        <li>
+            <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+{% end %}
+

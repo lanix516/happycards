@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}赠送记录{% end %}
+
+{% block main %}
+<h2 class="sub-header">记录</h2>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>赠者</th>
+            <th>获赠</th>
+            <th>分数</th>
+            <th>时间</th>
+            <th>状态</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in hand_list %}
+        {% if item %}
+        <tr>
+            <td>{{item.id}}</td>
+            <td>{{ item.sender}}</td>
+            <td>{{item.receiver}}</td>
+            <td>{{item.points}}</td>
+            <td>{{datetime.datetime.strftime(item.date, "%Y-%m-%d %H:%M:%S")}}</td>
+            <td>
+                {% if item.success%}
+                 <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                {%else%}
+                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                {%end%}
+            </td>
+
+        </tr>
+        {%end%}
+        {% end %}
+        </tbody>
+    </table>
+</div>
+<nav>
+    <ul class="pagination">
+        <li>
+            <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        {%for item in page_all%}
+        <li><a href="?page={{item}}">{{item}}</a></li>
+        {%end%}
+        <li>
+            <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+{%end%}
+
+

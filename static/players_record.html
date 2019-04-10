@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}玩家记录{% end %}
+{%block sidebar%}
+    <ul class="nav nav-sidebar">
+        <li class="active"><a href="/game/siteindex">管理首页</a></li>
+    </ul>
+{%end%}
+{% block main %}
+<h2 class="sub-header">记录</h2>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>玩家</th>
+            <th>投注</th>
+            <th>赢得</th>
+            <th>剩余</th>
+            <th>庄开</th>
+            <th>闲开</th>
+            <th>结果</th>
+            <th>参与</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in player_record %}
+        {% if item %}
+        <tr>
+            <td>{{item.id}}</td>
+            <td>{{ item.player.playerId }}</td>
+            <td>庄:{{item.player_bet.bank}},闲:{{item.player_bet.player}},平:{{item.player_bet.tie}},庄对:{{item.player_bet.bankPair}},闲对:{{item.player_bet.playerPair}}</td>
+            <td>{{item.player_win}}</td>
+            <td>{{item.player_remind}}</td>
+            <td>
+                {%for item1 in item.game.bank_cards%}
+                {{item1 & 15}}
+                {%end%}
+            </td>
+            <td>
+                {%for item2 in item.game.player_cards%}
+                {{item2 & 15}}
+                {%end%}
+            </td>
+            <td>
+                {%for item2 in item.game.game_result%}
+                {%if item2==0%}
+                庄，
+                {%elif item2==1%}
+                闲，
+                {%elif item2==2%}
+                平，
+                {%elif item2==3%}
+                庄对，
+                {%elif item2==4%}
+                闲对，
+                {%end%}
+                {%end%}
+            </td>
+            <td>{% if item.is_banker %}
+                    坐庄
+                {% else %}
+                    押注
+                {% end %}
+            </td>
+        </tr>
+        {%end%}
+        {% end %}
+        </tbody>
+    </table>
+</div>
+<nav>
+    <ul class="pagination">
+        <li>
+            <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        {%for item in page_all%}
+        <li><a href="?page={{item}}">{{item}}</a></li>
+        {%end%}
+        <li>
+            <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+{%end%}
+
+

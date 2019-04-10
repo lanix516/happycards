@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}单局记录{% end %}
+{%block sidebar%}
+    <ul class="nav nav-sidebar">
+        <li class="active"><a href="/game/siteindex">管理首页</a></li>
+    </ul>
+{%end%}
+{% block main %}
+<h2 class="sub-header">记录</h2>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>玩家</th>
+            <th>投注</th>
+            <th>赢得</th>
+            <th>剩余</th>
+            <th>参与</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in player_record %}
+        {% if item %}
+        <tr>
+            <td>{{item.id}}</td>
+            <td>{{ item.player.playerId }}</td>
+            <td>庄:{{item.player_bet.bank}},闲:{{item.player_bet.player}},平:{{item.player_bet.tie}},庄对:{{item.player_bet.bankPair}},闲对:{{item.player_bet.playerPair}}</td>
+            <td>{{item.player_win}}</td>
+            <td>{{item.player_remind}}</td>
+            <td>{% if item.is_banker %}
+                    坐庄
+                {% else %}
+                    押注
+                {% end %}
+            </td>
+        </tr>
+        {%end%}
+        {% end %}
+        </tbody>
+    </table>
+</div>
+{%end%}
+
+
